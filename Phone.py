@@ -6,7 +6,6 @@ from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 import mss
 
-# === Access Control ===
 authorized_token = None
 
 def authorize(token):
@@ -41,7 +40,6 @@ def generate_qr(token):
     qr.show()
     print(f"[QR] Scan this to open control panel: {url}")
 
-# === Command Execution ===
 def execute_command(token, command):
     if command == "authorize":
         return authorize(token)
@@ -130,7 +128,6 @@ def execute_command(token, command):
 
     return "Unknown command."
 
-# === Socket Server ===
 def start_socket_server():
     HOST = '0.0.0.0'
     PORT = 9999
@@ -148,7 +145,6 @@ def start_socket_server():
                 response = execute_command(*data.strip().split("::", 1))
                 conn.sendall(response.encode())
 
-# === Flask Web Server ===
 app = Flask(__name__)
 
 HTML_TEMPLATE = """
@@ -184,20 +180,20 @@ HTML_TEMPLATE = """
 <h2>📱 Remote Control Panel</h2>
 <form method="get" action="/send">
   <input type="hidden" name="token" value="{{ token }}">
-  <button name="cmd" value="volume up">🔊 Volume Up</button>
-  <button name="cmd" value="volume down">🔉 Volume Down</button>
-  <button name="cmd" value="mute">🔇 Mute</button>
-  <button name="cmd" value="unmute">🔈 Unmute</button>
-  <button name="cmd" value="shutdown">🔌 Shutdown</button>
-  <button name="cmd" value="restart">🔁 Restart</button>
-  <button name="cmd" value="sleep">😴 Sleep</button>
-  <button name="cmd" value="lock">🔒 Lock Screen</button>
-  <button name="cmd" value="screenshot">📸 Screenshot</button>
-  <button name="cmd" value="stats">📊 System Stats</button>
-  <button name="cmd" value="wifi off">📴 Wi-Fi Off</button>
-  <button name="cmd" value="wifi on">📶 Wi-Fi On</button>
-  <button name="cmd" value="bluetooth off">🔄 Bluetooth Off</button>
-  <button name="cmd" value="bluetooth on">🔁 Bluetooth On</button>
+  <button name="cmd" value="volume up"> Volume Up</button>
+  <button name="cmd" value="volume down"> Volume Down</button>
+  <button name="cmd" value="mute"> Mute</button>
+  <button name="cmd" value="unmute"> Unmute</button>
+  <button name="cmd" value="shutdown"> Shutdown</button>
+  <button name="cmd" value="restart"> Restart</button>
+  <button name="cmd" value="sleep"> Sleep</button>
+  <button name="cmd" value="lock"> Lock Screen</button>
+  <button name="cmd" value="screenshot"> Screenshot</button>
+  <button name="cmd" value="stats"> System Stats</button>
+  <button name="cmd" value="wifi off"> Wi-Fi Off</button>
+  <button name="cmd" value="wifi on"> Wi-Fi On</button>
+  <button name="cmd" value="bluetooth off"> Bluetooth Off</button>
+  <button name="cmd" value="bluetooth on"> Bluetooth On</button>
   <br><br>
   <input type="text" name="cmd" placeholder="popup Your message here">
   <button type="submit">🖼 Send Popup</button>
@@ -231,4 +227,5 @@ if __name__ == "__main__":
     token = "mark123"
     threading.Thread(target=start_flask, daemon=True).start()
     generate_qr(token)
+
     start_socket_server()
