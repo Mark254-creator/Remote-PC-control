@@ -195,7 +195,7 @@ HTML_TEMPLATE = """
   <button name="cmd" value="bluetooth on"> Bluetooth On</button>
   <br><br>
   <input type="text" name="cmd" placeholder="popup Your message here">
-  <button type="submit">🖼 Send Popup</button>
+  <button type="submit"> Send Popup</button>
 </form>
 </body>
 </html>
@@ -227,4 +227,5 @@ if __name__ == "__main__":
     generate_qr(token)
 
     start_socket_server()
+
 
