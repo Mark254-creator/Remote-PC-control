@@ -23,7 +23,6 @@ def revoke():
 def check_access(token):
     return token == authorized_token
 
-# === QR Generator ===
 def get_local_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     try:
@@ -222,10 +221,10 @@ def send_command():
 def start_flask():
     app.run(host="0.0.0.0", port=5000)
 
-# === Start Everything ===
 if __name__ == "__main__":
     token = "mark123"
     threading.Thread(target=start_flask, daemon=True).start()
     generate_qr(token)
 
     start_socket_server()
+
