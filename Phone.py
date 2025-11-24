@@ -176,7 +176,7 @@ HTML_TEMPLATE = """
   </style>
 </head>
 <body>
-<h2>📱 Remote Control Panel</h2>
+<h2> Remote Control Panel</h2>
 <form method="get" action="/send">
   <input type="hidden" name="token" value="{{ token }}">
   <button name="cmd" value="volume up"> Volume Up</button>
@@ -227,5 +227,6 @@ if __name__ == "__main__":
     generate_qr(token)
 
     start_socket_server()
+
 
 
